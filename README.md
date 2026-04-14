@@ -68,4 +68,4 @@ Equipe01-ExtracaoAudio-GloboRio/
 └── ...
 ```
 ### 4. Executar o projeto
-Agora é só rodar normalmente.
+Agora é só rodar normalmente. A pasta audios_extraidos vai começar vazia e a medida que você for rodando o código, espera-se que ela seja abastecida. 
