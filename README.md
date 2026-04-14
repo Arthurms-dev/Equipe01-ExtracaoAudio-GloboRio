@@ -21,6 +21,7 @@ Principais funcionalidades:
 - Bibliotecas de apoio
 
 ## Estrutura do Projeto
+```bash
 |--docs/ # Documentação do projeto
 |--src/ # Código fonte principal
   |--audio/ # Processamento de áudio
@@ -29,6 +30,7 @@ Principais funcionalidades:
 |--tests/ # Testes 
 |--requirement.txt # Dependências do projeto
 |--README.md
+```
 
 ## Funcionalidades
 - **Extração de áudio** arquivos de vídeo
