@@ -10,7 +10,7 @@ Principais funcionalidades:
 - Separação da trilha de áudio
 
 ## Equipe
-- **Desenvolvedores (6):** responsáveis pela implementação das funcionalidades
+- **Desenvolvedores (5):** responsáveis pela implementação das funcionalidades
 - **Product Owner (PO):** responsável por definir prioridades e backlog
 - **Scrum Master:** garante a aplicação das práticas ágeis e remoção de impedimentos
 
