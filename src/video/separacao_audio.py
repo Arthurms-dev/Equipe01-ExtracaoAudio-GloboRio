@@ -5,7 +5,7 @@ def extrair_audio(video_bruto, audio_extraido):
     
     try:
         subprocess.run(comando, check=True)
-        print(f"Sucesso! O audio foi extraído e está se encontra na pasta audios_extraídos")
+        print(f"Sucesso! O audio foi extraído e já se encontra na pasta audios_extraídos")
     except Exception as e:
         print(f"Erro {e}")
     
