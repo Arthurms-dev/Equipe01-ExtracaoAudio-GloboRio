@@ -1,12 +1,11 @@
-From moviepy.editor import VideoFileClip
+import moviepy.editor 
+import VideoFileClip
 import numpy as np
 
 def analisar_segmentos(video_path, threshold=0.05, min_duracao_fala=0.5):
     video = VideoFileClip(video_path)
     audio = video.audio
     
-    # Transformar áudio em frames para análise de amplitude
-    # Analisamos a cada 0.05 segundos para alta precisão
     fps_analise = 20 
     duracao = video.duration
     segmentos_fala = []
@@ -15,7 +14,6 @@ def analisar_segmentos(video_path, threshold=0.05, min_duracao_fala=0.5):
     inicio_fala = 0
 
     for t in np.arange(0, duracao, 1/fps_analise):
-        # Captura a amplitude máxima no instante t
         volume = np.max(np.abs(audio.get_frame(t)))
         
         if volume > threshold and not fala_ativa:
@@ -28,12 +26,9 @@ def analisar_segmentos(video_path, threshold=0.05, min_duracao_fala=0.5):
     
     return segmentos_fala, video
 
-# Execução
 segmentos, clip_original = analisar_segmentos("video1.mp4")
 
-# Exemplo de exportação do primeiro segmento detectado
 if segmentos:
     print(f"Detectados {len(segmentos)} segmentos de fala.")
     primeiro_corte = clip_original.subclip(segmentos[0][0], segmentos[0][1])
     primeiro_corte.write_videofile("fala_1.mp4")
- 
