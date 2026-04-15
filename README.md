@@ -24,9 +24,6 @@ Principais funcionalidades:
 ```bash
 |--docs/ # Documentação do projeto
 |--src/ # Código fonte principal
-  |--audio/ # Processamento de áudio
-  |--video/ # Processamento de vídeo 
-  |--utils/ # Funções auxiliares
 |--tests/ # Testes 
 |--requirement.txt # Dependências do projeto
 |--README.md
