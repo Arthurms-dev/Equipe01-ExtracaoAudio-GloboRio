@@ -21,8 +21,12 @@ def extrair_e_limpar_audio(video_input, output="audio_limpo.wav"):
     print("Extraindo e limpando áudio...")
 
     filtro_audio = (
-        "afftdn=nf=-45:nr=10,"
+        # O arnndn é um filtro de redução de ruído baseado em redes neurais, mas pode ser pesado para processar, utilizando IA.
+        
+        #f"arnndn=model='models/bd.rnnn'," 
+        "afftdn=nf=-45:nr=20:om=i,"
         "highpass=f=100," 
+        "agate=threshold=35dB" 
         "equalizer=f=350:width_type=h:width=150:g=-10,"
         "equalizer=f=1500:width_type=h:width=200:g=3," 
         "equalizer=f=4500:width_type=h:width=200:g=6," 
