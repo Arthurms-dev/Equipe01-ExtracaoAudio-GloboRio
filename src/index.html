@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Vídeo</title>
+    <style>
+      body {font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; margin: 0;}
+      .container {background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;}
+      
+      .file-input {display: none;}
+      .btn-upload { background-color: #DDC5EB; color: white; padding: 12px 24px; border-radius: 6px; cursor: pointer; display: inline-block; margin-bottom: 20px; transition: 0.3s; }
+      .btn-upload:hover { background-color: #0056b3; }
+
+      .btn-download { background-color: #DDC5EB; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; font-size: 14px; }
+      .btn-download:disabled { background-color: #ccc; cursor: not-allowed; }
+    </style>
+    </head>
+    <body>
+      <div class="container"> 
+        <h2>Conversor de Vídeo</h2> 
+        <form action="/upload" method="post" enctype="multipart/form-data"> 
+          <label for="video-upload" class="btn-upload"> Escolher o vídeo para ser convertido </label> 
+          <input id="video-upload" class="file-input" type="file" name="file" accept="video/*" onchange="this.form.submit()"> 
+        </form> 
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;"> 
+        <a href="/download" class="btn-download">
+        </a>
+      </div>
+    </body>
+</html>
