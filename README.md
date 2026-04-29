@@ -3,7 +3,7 @@
 # Sistema de Extração de Áudio e Vídeo
 
 ## Visão Geral
-Este projeto tem como objetivo desenvolver uma aplicação em **Python** para **extração e processamento de áudio e vídeo**, utilizando as ferramentas **MoviePy** e **FFmpeg**.  
+Este projeto tem como objetivo desenvolver uma aplicação em **Python** para **extração e processamento de áudio e vídeo**, utilizando a ferramenta **FFmpeg**.  
 Principais funcionalidades:
 - Segmentação da fala
 - Remoção de ruídos
