@@ -46,7 +46,7 @@ O projeto segue o framework **Scrum**, com:
 
 ## Opção 1:
 ### Acessando a aplicação web diretamente: 
-Link da aplicação web: https://extratordeaudioemvideo.up.railway.app/
+Link da aplicação web: https://equipe01-extracaoaudio-globorio.onrender.com
 
 
 ## Opção 2: passo a passo de como clonar o repositório
