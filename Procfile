@@ -1,1 +1,1 @@
-web: gunicorn integracaocompleta:app --timeout 300
+web: gunicorn integracaocompleta:app --timeout 300 --limit-request-line 0
