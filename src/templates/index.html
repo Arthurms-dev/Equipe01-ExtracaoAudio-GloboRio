@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Vídeo</title>
+    <title>Extrator de áudio</title>
     <style>
       body {
         font-family: sans-serif;
@@ -66,20 +66,20 @@
 
   <body>
     <div class="container">
-      <h2>Conversor de Vídeo</h2>
+      <h2>Extrator de áudio em vídeo</h2>
 
       <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="video-upload" class="btn-upload"> Escolher o vídeo para ser convertido </label>
+        <label for="video-upload" class="btn-upload"> Escolha o vídeo a ter seu áudio extraído </label>
         <input id="video-upload" class="file-input" type="file" name="file" accept="video/*"
           onchange="document.getElementById('msg').style.display='block'; this.form.submit()">
       </form>
 
-      <div id="msg" class="loading">Processando áudio e removendo silêncios...</div>
+      <div id="msg" class="loading">Processando vídeo em áudio...</div>
 
       {% if download_ready %}
       <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
       <a href="{{ url_for('download', filename=filename) }}" class="btn-download">
-        ⬇️ Baixar o áudio segmentado
+        ⬇️ Baixar o áudio .wav
       </a>
       {% endif %}
     </div>
