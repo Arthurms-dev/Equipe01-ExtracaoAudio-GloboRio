@@ -66,3 +66,6 @@ Equipe01-ExtracaoAudio-GloboRio/
 ```
 ### 4. Executar o projeto
 Agora é só rodar normalmente. A pasta audios_extraidos vai começar vazia e a medida que você for rodando o código, espera-se que ela seja abastecida. 
+
+### 5. Site da aplicação hospedada no Railway
+https://extratordeaudioemvideo.up.railway.app/
