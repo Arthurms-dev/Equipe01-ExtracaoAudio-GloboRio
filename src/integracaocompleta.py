@@ -4,6 +4,7 @@ import imageio_ffmpeg as ffmpeg
 from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
@@ -21,7 +22,7 @@ def extrair_e_limpar_audio(video_input, output):
     )
     ffmpeg_path = ffmpeg.get_ffmpeg_exe()   
     comando = [
-        ffmpeg_path, "-i", video_input, "-vn",
+        ffmpeg_path, "-threads", "1", "-i", video_input, "-vn",
         "-af", filtro_audio,
         "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "1",
         output, "-y"

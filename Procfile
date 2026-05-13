@@ -1,0 +1,1 @@
+web: gunicorn integracaocompleta:app --timeout 300
