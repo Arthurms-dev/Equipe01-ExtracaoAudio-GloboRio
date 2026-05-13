@@ -12,13 +12,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def extrair_e_limpar_audio(video_input, output):
     filtro_audio = (
-        "afftdn=nf=-24:nr=5,"
+        "afftdn=nf=-20:nr=3,"
         "highpass=f=70,"
-        "equalizer=f=160:width_type=q:width=0.9:g=1.5,"
-        "equalizer=f=3200:width_type=q:width=1.0:g=2,"
-        "equalizer=f=5200:width_type=q:width=0.8:g=1.2,"
         "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1,"
-        "loudnorm=I=-16:LRA=10:TP=-1.5"
     )
     ffmpeg_path = ffmpeg.get_ffmpeg_exe()   
     comando = [
