@@ -43,6 +43,13 @@ O projeto segue o framework **Scrum**, com:
 - **Revisão e testes**
 
 ## Como rodar o projeto
+
+## Opção 1:
+### Acessando a aplicação web diretamente: 
+Link da aplicação web: https://extratordeaudioemvideo.up.railway.app/
+
+
+## Opção 2: passo a passo de como clonar o repositório
 ### 1. Clonar o repositório
 ```bash
 git clone https://github.com/Arthurms-dev/Equipe01-ExtracaoAudio-GloboRio
@@ -66,6 +73,3 @@ Equipe01-ExtracaoAudio-GloboRio/
 ```
 ### 4. Executar o projeto
 Agora é só rodar normalmente. A pasta audios_extraidos vai começar vazia e a medida que você for rodando o código, espera-se que ela seja abastecida. 
-
-### 5. Site da aplicação hospedada no Railway
-https://extratordeaudioemvideo.up.railway.app/
