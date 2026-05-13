@@ -22,8 +22,7 @@ def extrair_e_limpar_audio(video_input, output):
 
     ffmpeg_path = shutil.which("ffmpeg") or "ffmpeg"
     comando = [
-        ffmpeg_path,
-        "ffmpeg", "-i", video_input, "-vn",
+        ffmpeg_path, "-i", video_input, "-vn",
         "-af", filtro_audio,
         "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "1",
         output, "-y"
