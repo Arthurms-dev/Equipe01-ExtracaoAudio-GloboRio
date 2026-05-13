@@ -1,5 +1,6 @@
 import os
 import subprocess
+import shutil
 from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__)
@@ -17,9 +18,11 @@ def extrair_e_limpar_audio(video_input, output):
         "equalizer=f=5200:width_type=q:width=0.8:g=1.2,"
         "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1,"
         "loudnorm=I=-16:LRA=10:TP=-1.5"
-)
+    )   
 
+    ffmpeg_path = shutil.which("ffmpeg") or "ffmpeg"
     comando = [
+        ffmpeg_path,
         "ffmpeg", "-i", video_input, "-vn",
         "-af", filtro_audio,
         "-acodec", "pcm_s16le", "-ar", "44100", "-ac", "1",
