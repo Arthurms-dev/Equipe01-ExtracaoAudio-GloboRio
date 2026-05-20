@@ -20,23 +20,24 @@ def run_ffmpeg(cmd):
     return result
 
 def extrair_e_limpar_audio(video_input, output):
-    filtro_audio = (
-        "afftdn=nf=-20:nr=3,"
-        "highpass=f=70,"
-        "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1"
-    )
 
     cmd = [
-        "ffmpeg",
-        "-y",
-        "-i", video_input,
-        "-vn",
-        "-af", filtro_audio,
-        "-acodec", "pcm_s16le",
-        "-ar", "44100",
-        "-ac", "1",
-        output,
-    ]
+    "ffmpeg",
+    "-y",
+    "-i", video_input,
+    "-vn",
+
+    "-af",
+    "highpass=f=80,lowpass=f=8000,afftdn=nf=-25",
+
+    "-ac", "1",
+    "-ar", "22050",
+
+    "-c:a", "mp3",
+    "-b:a", "128k",
+
+    output,
+]
 
     run_ffmpeg(cmd)
 
