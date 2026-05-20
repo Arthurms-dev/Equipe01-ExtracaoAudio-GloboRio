@@ -27,11 +27,8 @@ def extrair_e_limpar_audio(video_input, output):
     "-i", video_input,
     "-vn",
 
-    "-af",
-    "highpass=f=80,lowpass=f=8000,afftdn=nf=-25",
-
     "-ac", "1",
-    "-ar", "22050",
+    "-ar", "44100",
 
     "-c:a", "mp3",
     "-b:a", "128k",
