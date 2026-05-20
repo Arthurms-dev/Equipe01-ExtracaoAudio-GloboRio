@@ -15,7 +15,7 @@ def extrair_e_limpar_audio(video_input, output):
     filtro_audio = (
         "afftdn=nf=-20:nr=3,"
         "highpass=f=70,"
-        "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1,"
+        "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1"
     )
 
     job_id = str(uuid.uuid4())
