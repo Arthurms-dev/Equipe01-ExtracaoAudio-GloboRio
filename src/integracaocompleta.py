@@ -2,7 +2,7 @@ import os
 import subprocess
 import glob
 import imageio_ffmpeg as ffmpeg
-from flask import Flask, render_template, request, send_file
+from flask import Flask, jsonify, render_template, request, send_file
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def extrair_e_limpar_audio(video_input, output):
     filtro_audio = (
         "afftdn=nf=-20:nr=3,"
         "highpass=f=70,"
-        "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1,"
+        "acompressor=threshold=-21dB:ratio=1.8:attack=25:release=220:makeup=1"
     )
 
     segmentos_dir = os.path.join(UPLOAD_FOLDER, "segmentos")
@@ -26,7 +26,7 @@ def extrair_e_limpar_audio(video_input, output):
         ffmpeg_path,
         "-i", video_input,
         "-f", "segment",
-        "-segment_time", "60",
+        "-segment_time", "15",
         "-c", "copy",
         segmento_pattern,
         "-y"
@@ -76,38 +76,45 @@ def extrair_e_limpar_audio(video_input, output):
 
 @app.route('/')
 def index():
-    return render_template('index.html', download_ready=False)
+    return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
-        return "Nenhum arquivo enviado", 400
-    
+        return jsonify({
+            "erro": "Nenhum arquivo enviado"
+        }), 400
     video_file = request.files['file']
-    if video_file.filename == '':
-        return "Nenhum arquivo selecionado", 400
-
-    base_name = os.path.splitext(video_file.filename)[0]
-    video_path = os.path.join(UPLOAD_FOLDER, video_file.filename)
-    audio_final_name = f"{base_name}_final.wav"
-    audio_final_path = os.path.join(UPLOAD_FOLDER, audio_final_name)
-
-    video_file.save(video_path)
     
-    try:
-        extrair_e_limpar_audio(video_path, audio_final_path)
-        
-        if os.path.exists(video_path): os.remove(video_path)
+    if video_file.filename == '':
+        return jsonify({
+            "erro": "Nenhum arquivo selecionado"
+        }), 400
 
-        return render_template('index.html', download_ready=True, filename=audio_final_name)
+    try:
+        base_name = os.path.splitext(video_file.filename)[0]
+        video_path = os.path.join(UPLOAD_FOLDER, video_file.filename)
+
+        video_file.save(video_path)
+
+        output_wav = os.path.join(
+            UPLOAD_FOLDER,
+            f"{base_name}_processado.wav"
+        )
+
+        extrair_e_limpar_audio(video_path, output_wav)
+        
+        return send_file(
+            output_wav,
+            as_attachment=True,
+            download_name=f"{base_name}_processado.wav",
+            mimetype="audio/wav"
+        )
     
     except Exception as e:
-        return f"Erro no processamento: {e}", 500
-
-@app.route('/download/<filename>')
-def download(filename):
-    return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
+        return jsonify({
+            "erro": str(e)
+        }), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
