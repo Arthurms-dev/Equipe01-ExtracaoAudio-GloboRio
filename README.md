@@ -5,9 +5,8 @@
 ## Visão Geral
 Este projeto tem como objetivo desenvolver uma aplicação em **Python** para **extração e processamento de áudio e vídeo**, utilizando a ferramenta **FFmpeg**.  
 Principais funcionalidades:
-- Segmentação da fala
-- Remoção de ruídos
 - Separação da trilha de áudio
+- Remoção de ruídos
 
 ## Equipe
 - **Desenvolvedores (5):** responsáveis pela implementação das funcionalidades
@@ -16,24 +15,20 @@ Principais funcionalidades:
 
 ## Tecnologias 
 - [Python](https://www.python.org/) 
-- [MoviePy](https://zulko.github.io/moviepy/) 
 - [FFmpeg](https://ffmpeg.org/)
-- Bibliotecas de apoio
+- Bibliotecas de apoio - os, subprocess e Flask
 
 ## Estrutura do Projeto
 ```bash
 |--docs/ # Documentação do projeto
 |--src/ # Código fonte principal
-|--tests/ # Testes 
 |--requirement.txt # Dependências do projeto
 |--README.md
 ```
 
 ## Funcionalidades
 - **Extração de áudio** arquivos de vídeo
-- **Segmentação da fala** análise detalhada
 - **Remoção de ruídos** utilizando filtros
-- **Separação de trilhas** (voz, música, etc)
 
 ## Metodologia de Trabalho
 O projeto segue o framework **Scrum**, com:
@@ -46,10 +41,11 @@ O projeto segue o framework **Scrum**, com:
 
 ## Opção 1:
 ### Acessando a aplicação web diretamente: 
+_observação: não roda vídeos com mais de 1 minuto_
 Link da aplicação web: https://equipe01-extracaoaudio-globorio.onrender.com
 
 
-## Opção 2: passo a passo de como clonar o repositório
+## Opção 2: passo a passo de como clonar o repositório (MAIS INDICADO)
 ### 1. Clonar o repositório
 ```bash
 git clone https://github.com/Arthurms-dev/Equipe01-ExtracaoAudio-GloboRio
@@ -66,10 +62,15 @@ Após baixar, coloque as pastas na raiz do projeto:
 ```
 Equipe01-ExtracaoAudio-GloboRio/
 │
-├── videos_teste/
-├── audios_extraidos/
 ├── src/
-└── ...
+├── ── templates/ 
+├── ── integracaocompleta.py
+├── ── render.yaml  
+├── LICENSE
+├── README.md
+└── requirements.txt
+
+ ...
 ```
 ### 4. Executar o projeto
-Agora é só rodar normalmente. A pasta audios_extraidos vai começar vazia e a medida que você for rodando o código, espera-se que ela seja abastecida. 
+Agora é só rodar normalmente que seu vídeo será baixado na sua máquina local.
