@@ -1,5 +1,5 @@
-  <!DOCTYPE html>
-  <html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 
   <head>
     <meta charset="UTF-8">
@@ -68,21 +68,52 @@
     <div class="container">
       <h2>Extrator de áudio em vídeo</h2>
 
-      <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="video-upload" class="btn-upload"> Escolha o vídeo a ter seu áudio extraído </label>
-        <input id="video-upload" class="file-input" type="file" name="file" accept="video/*"
-          onchange="document.getElementById('msg').style.display='block'; this.form.submit()">
+      <form id="form" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="video-upload" class="btn-upload">
+          Escolha o vídeo a ter seu áudio extraído
+        </label>
+
+        <input id="video-upload" class="file-input" type="file" name="file" accept="video/*">
       </form>
 
       <div id="msg" class="loading">Processando vídeo em áudio...</div>
 
-      {% if download_ready %}
-      <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-      <a href="{{ url_for('download', filename=filename) }}" class="btn-download">
+      <a id="download" class="btn-download" style="display:none;">
         ⬇️ Baixar o áudio .wav
       </a>
-      {% endif %}
-    </div>
+      
+      <script>
+        const form = document.getElementById("form");
+        const fileInput = document.getElementById("video-upload");
+        const msg = document.getElementById("msg");
+        const download = document.getElementById("download");
+
+        fileInput.addEventListener("change", async () => {
+          if (!fileInput.files.length) return;
+
+          msg.style.display = "block";
+          msg.innerText = "Processando...";
+
+          const formData = new FormData(form);
+
+          const res = await fetch("/upload", {
+            method: "POST",
+            body: formData
+          });
+
+          const data = await res.json();
+
+          if (data.erro) {
+            msg.innerText = "Erro: " + data.erro;
+            return;
+          }
+
+          msg.innerText = "Pronto!";
+
+          download.href = data.download_url;
+          download.style.display = "inline-block";
+        });
+      </script>
   </body>
 
-  </html>
+</html>

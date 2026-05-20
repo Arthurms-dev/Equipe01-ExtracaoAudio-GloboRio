@@ -69,16 +69,25 @@ def upload():
 
         extrair_e_limpar_audio(video_path, output_wav)
 
-        return send_file(
-            output_wav,
-            as_attachment=True,
-            download_name=f"{base_name}_processado.wav",
-            mimetype="audio/wav"
-        )
+        return jsonify({
+            "status": "ok",
+            "job_id": job_id,
+            "download_url": f"/download/{job_id}"
+        })
 
     except Exception as e:
         print("ERRO:", str(e))
         return jsonify({"erro": str(e)}), 500
+    
+@app.route('/download/<job_id>')
+def download(job_id):
+    workdir = os.path.join(UPLOAD_FOLDER, job_id)
+    files = os.listdir(workdir)
+    wav_file = next((f for f in files if f.endswith(".wav")), None)
+    if not wav_file:
+        return jsonify({"erro": "Arquivo não encontrado"}), 404
+    file_path = os.path.join(workdir, wav_file)
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
