@@ -7,6 +7,12 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "/tmp/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+ALLOWED_EXTENSIONS = {'.mp4', '.mkv', '.avi', '.mov', '.flv', '.wmv', '.webm'}
+
+def allowed_file(filename):
+    ext = os.path.splitext(filename)[1].lower()
+    return ext in ALLOWED_EXTENSIONS
+
 def run_ffmpeg(cmd):
     result = subprocess.run(
         cmd,
@@ -22,19 +28,15 @@ def run_ffmpeg(cmd):
 def extrair_e_limpar_audio(video_input, output):
 
     cmd = [
-    "ffmpeg",
-    "-y",
-    "-i", video_input,
-    "-vn",
-
-    "-ac", "1",
-    "-ar", "44100",
-
-    "-c:a", "mp3",
-    "-b:a", "128k",
-
-    output,
-]
+        "ffmpeg",
+        "-y",
+        "-i", video_input,
+        "-vn",
+        "-ac", "1",
+        "-ar", "44100",
+        "-c:a", "pcm_s16le",
+        output,
+    ]
 
     run_ffmpeg(cmd)
 
@@ -51,6 +53,11 @@ def upload():
 
     if video_file.filename == '':
         return jsonify({"erro": "Nenhum arquivo selecionado"}), 400
+    
+    if not allowed_file(video_file.filename):
+        return jsonify({
+            "erro": "Tipo de arquivo não permitido. Por favor, envie apenas arquivos de vídeo."
+        }), 400
 
     try:
         import uuid
@@ -75,7 +82,7 @@ def upload():
 
     except Exception as e:
         print("ERRO:", str(e))
-        return jsonify({"erro": str(e)}), 500
+        return jsonify({"erro": "Falha ao processar o vídeo. O arquivo pode estar corrompido ou formato inválido."}), 500
     
 @app.route('/download/<job_id>')
 def download(job_id):
